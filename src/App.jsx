@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import Profile from './pages/Profile'
 import Appointment from './pages/Appointment'
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/appointment' element={<Appointment />} />
       </Routes>
-
+      <Footer/>
     </div>
   )
 }
