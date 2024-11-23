@@ -23,7 +23,7 @@ const TopDoctor = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {doctors.slice(0, 10).map((doctor, index) => (
+          {doctors.slice(0, 9).map((doctor, index) => (
 
             <div  onClick={()=> navigate(`/appointment/${doctor._id}`)}
               key={index} 
