@@ -11,8 +11,8 @@ const Login = () => {
     // Add submission logic here
   };
   return (
-    <form
-      className="min-h-[80vh] flex items-center justify-center bg-gray-100"
+    <form 
+      className="min-h-[80vh] flex items-center justify-center mb-10"
       onSubmit={onSubmitHandler}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
