@@ -68,7 +68,7 @@ const NavBar = () => {
               <div className='absolute top-full right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-20'>
                 <div className='py-1'>
                   <p onClick={() => { navigate('/Profile'); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>My Profile</p>
-                  <p onClick={() => { navigate('/Appointment'); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>My Appointment</p>
+                  <p onClick={() => { navigate('/MyAppointment'); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>My Appointment</p>
                   <p onClick={() => { setToken(false); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>Logout</p>
                 </div>
               </div>
@@ -82,6 +82,23 @@ const NavBar = () => {
             Create Account
           </button>
         )}
+
+        <img  onClick={()=>setShowMenu(true)} className='w-6 md:hidden' src={assets.menu_icon} alt="" />
+
+        {/* Mobile menu */}
+        <div className={`${showMenu ? `fixed w-full`: `h-0 w-0` }  md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition`}>
+          <div className='flex items-center justify-between px-5 py-6'>
+            <img className='w-36' src={assets.logo} alt="" />
+            <img className='w-7' onClick={()=>setShowMenu(false)} src={assets.cross_icon} alt="" />
+          </div>
+
+          <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
+           <NavLink  onClick={()=>setShowMenu(false)} to={'/'}> <p className='px-4 py-3 rounded-full inline-block'>Home</p></NavLink>
+           <NavLink  onClick={()=>setShowMenu(false)} to={'/doctor'}> <p className='px-4 py-3 rounded-full inline-block'>All Doctors</p> </NavLink>
+           <NavLink  onClick={()=>setShowMenu(false)} to={'/about'}> <p className='px-4 py-3 rounded-full inline-block'>About</p> </NavLink>
+           <NavLink  onClick={()=>setShowMenu(false)} to={'/contact'}> <p className='px-4 py-3 rounded-full inline-block'>Contact</p></NavLink>
+          </ul>
+        </div>
       </div>
     </div>
   )
