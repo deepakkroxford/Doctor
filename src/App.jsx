@@ -3,10 +3,10 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Doctor from './pages/Doctor'
-import Login from './pages/login'
+import Login from './pages/Login'
 import MyAppointments from './pages/MyAppointments'
 import Contact from './pages/Contact'
-import Profile from './pages/Profile'
+import MyProfile from './pages/MyProfile'
 import Appointment from './pages/Appointment'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
@@ -26,7 +26,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/myappointment' element={<MyAppointments />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<MyProfile/>} />
         <Route path='/appointment/:docId' element={<Appointment/>} />
       </Routes>
       <Footer/>
