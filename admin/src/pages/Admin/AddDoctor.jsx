@@ -18,7 +18,7 @@ const AddDoctor = () => {
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
 
-  const { backendUrl, aToken } = useContext(AdminContext)
+  const { backendUrl, atoken } = useContext(AdminContext)
 
   const handleSubmit = async (e) => {
 
@@ -47,12 +47,13 @@ const AddDoctor = () => {
       formData.forEach((value, key) => {
         console.log(`${key} : ${value}`);
       })
-
-     const {data} = await axios.post(backendUrl+'/api/admin/add-doctor',formData, {headers:{aToken}})
-  
+      const { data } = await axios.post(backendUrl + '/api/admin/add-doctor', formData, { headers: { atoken } })
       console.log(data)
       if (data.success) {
         toast.success(data.message)
+
+        {/*after submiting the the form all the field will be rest expect those field that are not mentions down  */}
+        
         setDoctorImg('');
         setAddress1('');
         setAddress2('');
