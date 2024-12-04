@@ -77,4 +77,21 @@ const loginAdmin= async (req, res) => {
     }
 }
 
-export {addDoctor ,loginAdmin}
+//api to get all doctor list for admin pannel
+
+/*
+This code is a api and it will give us the dotocr details except the password 
+for deselecting the password we use .select('-password').
+*/
+const getAllDoctors = async (req, res) => {
+    try{
+        const doctors = await doctorModel.find({}).select('-password')
+        res.json({success:true, doctors})
+    }
+    catch(error){
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+}
+
+export {addDoctor ,loginAdmin, getAllDoctors}

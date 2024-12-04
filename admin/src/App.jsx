@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard';
 import AllApointements from './pages/Admin/AllApointements';
 import AddDoctor from './pages/Admin/AddDoctor';
+import DoctorList from './pages/Admin/DoctorList';
 
 const App = () => {
   const { atoken } = useContext(AdminContext);
@@ -24,7 +25,8 @@ const App = () => {
           <Route path='/' element={<></>} />
           <Route path='/admin-dashboard' element={<Dashboard />} />
           <Route path='/all-appointments' element={<AllApointements />} />
-          <Route path='/add-doctor' element={<AddDoctor />} />
+          <Route path='/add-doctor' element={<AddDoctor/>} />
+          <Route path ='/doctor-list' element={<DoctorList/>}/>
         </Routes>
       </div>
     </div>
