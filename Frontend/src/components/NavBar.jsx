@@ -1,11 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { assets } from '../assets/assets_frontend/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/AppContext';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
+  // const [token, setToken] = useState(true);
+  const {token,setToken} = useContext(AppContext);
+
+  const logout =()=>{
+    setToken(false);
+    localStorage.removeItem('token');
+  }
 
   {/* This i use for when i click to the image the drop-down will open and when i click again then drop-down will close */ }
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -69,7 +76,7 @@ const NavBar = () => {
                 <div className='py-1'>
                   <p onClick={() => { navigate('/Profile'); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>My Profile</p>
                   <p onClick={() => { navigate('/MyAppointment'); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>My Appointment</p>
-                  <p onClick={() => { setToken(false); setIsDropdownOpen(false); }} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>Logout</p>
+                  <p onClick={  logout} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer transition duration-300 ease-in-out'>Logout</p>
                 </div>
               </div>
             )}
@@ -104,3 +111,4 @@ const NavBar = () => {
   )
 }
 export default NavBar
+
