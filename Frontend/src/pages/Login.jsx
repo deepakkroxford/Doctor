@@ -1,15 +1,56 @@
-import React, { useState } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../context/AppContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [state, setState] = useState('Sign Up');
-  const [Email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const navigate = useNavigate();
+  const {token,setToken,backendUrl} = useContext(AppContext)
+
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     // Add submission logic here
+
+    try{
+      if(state=='Sign Up'){
+        const {data} = await axios.post(backendUrl+'/api/user/register',{name,password,email})
+        if(data.success){
+          localStorage.setItem('token',data.token)
+          setToken(data.token)
+        }else{
+          toast.error(data.message)
+        }
+      }
+      else{
+        const {data} = await axios.post(backendUrl+'/api/user/login',{password,email})
+        if(data.success){
+          localStorage.setItem('token',data.token)
+          setToken(data.token)
+        }else{
+          toast.error(data.message)
+        }
+      }
+    }
+    catch(error){
+      toast.error(error.message);
+    }
+
   };
+
+ {/*This use effect main function is when we have token it means user is login so we move use 
+  to the home page  */}
+   useEffect(()=>{
+    if(token){
+      navigate('/')
+    }
+    
+   })
+   
   return (
     <form 
       className="min-h-[80vh] flex items-center justify-center mb-10"
@@ -26,7 +67,7 @@ const Login = () => {
         {/* It means when state is sign up only that time we show the full name we 
       done this because at login time the full name is not requrired only eamil address and password is required for the 
       sign up  */}
-
+     
         {state === 'Sign Up' &&
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -51,7 +92,7 @@ const Login = () => {
             type="email"
             id="email"
             placeholder="Enter email"
-            value={Email}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             required
@@ -83,7 +124,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-600 mt-4">
           {state === 'Sign Up' ? "Already have an account?" : "Don't have an account?"}{' '}
           <button
-            type="button"
+            type="submit"
             className="text-blue-600 hover:underline"
             onClick={() => setState(state === 'Sign Up' ? 'Login' : 'Sign Up')}
           >
