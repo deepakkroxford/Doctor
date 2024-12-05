@@ -52,8 +52,8 @@ const AddDoctor = () => {
       if (data.success) {
         toast.success(data.message)
 
-        {/*after submiting the the form all the field will be rest expect those field that are not mentions down  */}
-        
+  {/*after submiting the the form all the field will be rest expect those field that are not mentions down  */}
+
         setDoctorImg('');
         setAddress1('');
         setAddress2('');
