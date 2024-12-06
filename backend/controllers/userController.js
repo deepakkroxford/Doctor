@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
-            return res.status(400).json({ error: 'All fields are required' });
+            return res.json({success:false, message: 'All fields are required' });
         }
 
         if (!validator.isEmail(email)) {
@@ -76,17 +76,17 @@ const loginUser = async (req, res) => {
 //Api to get user profile data 
 const getProfile = async (req, res) => {
     try {
-        const userId = req.userId; // Use userId from middleware
+        const {userId} = req.body; // Use userId from middleware
         console.log("Received userId:", userId);
 
         const userData = await userModel.findById(userId).select('-password');
         console.log(userData);
-
-        if (!userData) {
-            return res.json({ success: false, message: "User not found" });
-        }
-
         res.json({ success: true, userData });
+
+        // if (!userData) {
+        //     return res.json({ success: false, message: "User not found" });
+        // }
+       
     } catch (error) {
         console.log(error);
         res.json({ success: false, message: error.message });
