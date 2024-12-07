@@ -48,7 +48,6 @@ const Login = () => {
     if(token){
       navigate('/')
     }
-    
    })
    
   return (
