@@ -7,7 +7,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   // const [token, setToken] = useState(true);
-  const {token,setToken} = useContext(AppContext);
+  const {token,setToken,userData} = useContext(AppContext);
 
   const logout =()=>{
     setToken(false);
@@ -64,7 +64,7 @@ const NavBar = () => {
               className='flex items-center gap-2 cursor-pointer'
               onClick={toggleDropdown}
             >
-              <img className='w-8 h-8 rounded-full object-cover' src={assets.profile_pic} alt="Profile" />
+              <img className='w-8 h-8 rounded-full object-cover' src={userData.image} alt="Profile" />
               <img
                 className={`w-2.5 h-2.5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`}
                 src={assets.dropdown_icon}
