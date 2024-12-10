@@ -183,7 +183,7 @@ const listAppointment = async (req, res) => {
 
     try{
         const {userId} = req.body;
-        const appointments = await appointmentModel.find(userId);
+        const appointments = await appointmentModel.find({userId});
 
         res.json({success: true,appointments})
     }
