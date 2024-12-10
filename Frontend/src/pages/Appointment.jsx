@@ -14,7 +14,7 @@ const Appointment = () => {
 
   const [docInfo, setDocInfo] = useState(null);
   const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-  const [docSolts, setDocSlots] = useState([]);
+  const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState('');
   const navigate = useNavigate();
@@ -52,11 +52,10 @@ const Appointment = () => {
         let month = currentDate.getMonth()+1;
         let year = currentDate.getFullYear();
 
-        const slotDate = day + "-" + month + "-" + year;
+        const slotDate = day + "_" + month + "_" + year;
         const slotTime = formattedTime
 
         const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime)? false : true;
-
         if (isSlotAvailable){
           timeSlots.push({
             datetime: new Date(currentDate),
@@ -84,6 +83,7 @@ const Appointment = () => {
     }
   };
 
+  
 
   const bookAppointment = async () => {
     if (!token) {
@@ -91,13 +91,13 @@ const Appointment = () => {
       return navigate('/Login')
     }
     try {
-      const date = docSolts[slotIndex][0].datetime
+      const date = docSlots[slotIndex][0].datetime
 
       let day = date.getDate()
       let month = date.getMonth() + 1
       let year = date.getFullYear()
 
-      const slotDate = day + "-" + month + "-" + year
+      const slotDate = day + "_" + month + "_" + year
       console.log(slotDate)
 
       const { data } = await axios.post(backendUrl + '/api/user/book-appointment', {docId,slotDate,slotTime}, { headers: { token } })
@@ -123,8 +123,8 @@ const Appointment = () => {
 
 
   useEffect(() => {
-    console.log(docSolts)
-  }, [docSolts])
+    console.log(docSlots)
+  }, [docSlots])
 
   return (
     docInfo && (
@@ -178,7 +178,7 @@ const Appointment = () => {
           <p>Booking Slots</p>
           <div className='flex gap-3 items-center w-full overflow-x-scroll mt-4'>
             {
-              docSolts.length && docSolts.map((item, index) => (
+              docSlots.length && docSlots.map((item, index) => (
                 <div onClick={() => setSlotIndex(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-primary text-white' : 'border-gray-200'}`} key={index}>
                   <p>{item[0] && dayOfWeek[item[0].datetime.getDay()]}</p>
                   <p>{item[0] && item[0].datetime.getDate()}</p>
@@ -188,7 +188,7 @@ const Appointment = () => {
           </div>
 
           <div className='grid grid-3 gap-4'>
-            {docSolts.length && docSolts[slotIndex].map((item, index) => (
+            {docSlots.length && docSlots[slotIndex].map((item, index) => (
               <p onClick={() => setSlotTime(item.time)} className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white' : 'text-gray-400 border border-gray-300'}`} key={index}>
                 {item.time.toLowerCase()}
               </p>
@@ -200,8 +200,6 @@ const Appointment = () => {
 
         {/* Listing Related Docotr */}
         <RelatedDoctor docId={docId} speciality={docInfo.speciality} />
-
-
       </div>
     )
   );
