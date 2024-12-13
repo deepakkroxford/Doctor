@@ -5,7 +5,8 @@ export const AdminContext = createContext();
 const AdminContextProvider = (props) => {
   const [atoken, setAtoken] = useState(localStorage.getItem('atoken') ? localStorage.getItem('atoken') : '')
   const backendUrl = import.meta.env.VITE_BACKEND_URL
-
+  const [appointments,setAppointments] = useState([]);
+  const [dashData,setDashData] = useState(false);
 
   {/* The line no -12 to 27 is responsible for calling the api for fetching the all doctor details 
     line no 13 is a useState hook that will store the output of the database in the array 
@@ -45,11 +46,61 @@ const AdminContextProvider = (props) => {
     }
   }
 
+  const getAllAppointments = async()=>{
+    try{
+      const {data} = await axios.get(backendUrl+'/api/admin/get-allappointments',{headers:{atoken}})
+      if(data.success){
+        setAppointments(data.appointments.reverse()) // to show the appointments in descending order of date  // reverse() method is used to reverse the order of array elements.  // reverse() modifies the original array.  // array.reverse() is a in-place operation that modifies the original array and returns the array.
+        console.log(data.appointments)
+      }
+      else{
+        toast.error(data.message)
+      }
+    }
+    catch(error){
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
+
+  const appointmentCancel = async(appointmentId)=>{
+     try{
+      const {data} = await axios.post(backendUrl+'/api/admin/cancel',{appointmentId},{headers:{atoken}})
+      if(data.success){
+        toast.success(data.message)
+        getAllAppointments()
+      }
+      else{
+        toast.error(data.message)
+      }
+     }
+     catch(error){
+       console.log(error.message)
+       toast.error(error.message)
+     }
+  }
+
+  const getDashData = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + '/api/admin/dashboard', { headers: { atoken } })
+      if (data.success) {
+        setDashData(data.dashData)
+        console.log(data.dashData)
+      }
+      else {
+        toast.error(data.message)
+      }
+    }
+    catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   const value = {
     atoken, setAtoken,
     backendUrl,getAllDoctors,doctors,
-    changeAvailablity
+    changeAvailablity,getAllAppointments,
+    appointments,setAppointments,appointmentCancel,getDashData,dashData
   }
   return (
     <AdminContext.Provider value={value}>
