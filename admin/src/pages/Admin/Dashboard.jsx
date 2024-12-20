@@ -38,17 +38,21 @@ const Dashboard = () => {
                 </div>
               </div>
               {item.cancelled ? (
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 animate-pulse">
-                  Cancelled
-                </span>
-              ) : (
-                <button
-                  onClick={() => appointmentCancel(item._id)}
-                  className="text-red-600 hover:text-red-900 focus:outline-none transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95"
-                >
-                  <XCircle className="h-5 w-5" />
-                </button>
-              )}
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 transition-all duration-300 ease-in-out animate-pulse">
+                        Cancelled
+                      </span>
+                    ) : item.isCompleted ? (
+                      <p className="text-green-500 text-xs font-medium">
+                       Completed
+                      </p>
+                    ) : (
+                      <button
+                        onClick={() => appointmentCancel(item._id)}
+                        className="text-red-600 hover:text-red-900 focus:outline-none transition-transform duration-300 ease-in-out hover:scale-110 active:scale-95"
+                      >
+                        <XCircle className="h-5 w-5" />
+                      </button>
+                    )}
             </div>
           ))}
         </div>
