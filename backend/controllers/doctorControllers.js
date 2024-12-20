@@ -2,6 +2,7 @@ import doctorModel from '../models/doctorModel.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import appointmentModel from '../models/appointmentsModel.js'
+
 //api to changethe availability of the doctor
 const changeAvailablity = async (req, res) => {
     try {
@@ -145,4 +146,42 @@ const doctorDashboard = async (req, res) => {
     }
 }
 
-export { changeAvailablity, doctorList, doctorLogin, appointmentsDoctor, appointmentCompleted, appointmentCancel, doctorDashboard }
+//api to get the doctor profile for the doctor pannel 
+
+const doctorProfile = async (req, res) => {
+    try {
+        const { docId } = req.body;
+        const profileData = await doctorModel.findById(docId).select('-password')
+        res.json({ success: true, profileData })
+    }
+    catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+//api to update the doctor profile for the doctor pannel
+
+const updateDoctorProfile = async (req, res) => {
+    try {
+        const { docId, fees, address, available } = req.body;
+        await doctorModel.findByIdAndUpdate(docId, { fees, address, available })
+        res.json({ success: true, message: 'Doctor profile updated successfully' })
+    }
+    catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export {
+    changeAvailablity,
+    doctorList,
+    doctorLogin,
+    appointmentsDoctor,
+    appointmentCompleted,
+    appointmentCancel,
+    doctorDashboard,
+    doctorProfile,
+    updateDoctorProfile
+}
