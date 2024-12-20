@@ -62,6 +62,10 @@ const AllAppointments = () => {
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 transition-all duration-300 ease-in-out animate-pulse">
                         Cancelled
                       </span>
+                    ) : item.isCompleted ? (
+                      <p className="text-green-500 text-xs font-medium">
+                       Completed
+                      </p>
                     ) : (
                       <button
                         onClick={() => appointmentCancel(item._id)}
