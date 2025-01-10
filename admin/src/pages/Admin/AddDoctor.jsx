@@ -7,7 +7,7 @@ import axios from 'axios';
 const AddDoctor = () => {
 
   const [doctorImg, setDoctorImg] = useState('');
-  const [doctorName, setDoctorName] = useState('');
+  const [doctorName, setDoctorName] = useState("");
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fees, setFees] = useState('');
