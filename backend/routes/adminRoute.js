@@ -13,3 +13,6 @@ adminRoute.get('/get-allappointments',authAdmin,appointmentsAdmin);
 adminRoute.post('/cancel',authAdmin,appointmentCancel)
 adminRoute.get('/dashboard',authAdmin,adminDashboard)
 export default adminRoute;
+
+
+// http/localhost:4000/api/admin/all-doctor
