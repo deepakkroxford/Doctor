@@ -15,13 +15,13 @@ const Contact = () => {
           <p className="text-lg font-semibold text-gray-800">Our Office</p>
           <p className="text-gray-600">54709 Willms Station Suite 350, Washington, USA</p>
           <p className="text-gray-600">Tel: <span className="font-semibold">(415) 555‑0132</span></p>
-          <p className="text-gray-600">Email: <a href="mailto:greatstackdev@gmail.com" className="text-blue-600 hover:underline">greatstackdev@gmail.com</a></p>
-          <p className="text-lg font-semibold text-gray-800">Careers at PRESCRIPTO</p>
-          <p className="text-gray-600">Learn more about our teams and job openings.</p>
+          <p className="text-gray-600">Email: <a href="mailto:deepakkr.oxford@gmail.com" className="text-blue-600 hover:underline">deepakkr.oxford@gmail.com</a></p>
+          <p className="text-lg font-semibold text-gray-800"></p>
+          {/* <p className="text-gray-600">Learn more about our teams and job openings.</p> */}
 
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          {/* <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             Explore Jobs
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
