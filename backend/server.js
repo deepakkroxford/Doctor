@@ -26,4 +26,4 @@ app.use('/api/user',userRouter);
 app.get('/',(req,res)=>{
     res.send('Hello World from Express.js');
 })
-app.listen(port, ()=> console.log('listening on port',port));
+app.listen(port, ()=> console.log('listening on port http://localhost:4000',port));
