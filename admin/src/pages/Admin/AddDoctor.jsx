@@ -184,7 +184,7 @@ const AddDoctor = () => {
             onChange={(e) => setSpeciality(e.target.value)}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
           >
-            {['General physician', 'Gynecologist', 'Neurologist', 'Pediatricians', 'Dermatologist', 'Gastroenterologist'].map((spec) => (
+            {['General physician', 'Gynecologist', 'Neurologist', 'Pediatrician', 'Dermatologist', 'Gastroenterologist'].map((spec) => (
               <option key={spec} value={spec}>
                 {spec}
               </option>
